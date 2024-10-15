@@ -33,6 +33,8 @@
             button_F1 = new Button();
             panel_F1 = new Panel();
             groupBox_F1 = new GroupBox();
+            panel_F2 = new Panel();
+            groupBox_F2 = new GroupBox();
             panel_add = new Panel();
             cancel_adding = new Button();
             special_check = new CheckBox();
@@ -53,6 +55,7 @@
             button_sub = new Button();
             button_add = new Button();
             panel_F1.SuspendLayout();
+            panel_F2.SuspendLayout();
             panel_add.SuspendLayout();
             panel_special.SuspendLayout();
             SuspendLayout();
@@ -95,6 +98,23 @@
             groupBox_F1.TabIndex = 5;
             groupBox_F1.TabStop = false;
             // 
+            // panel_F2
+            // 
+            panel_F2.BackColor = SystemColors.ButtonShadow;
+            panel_F2.Controls.Add(groupBox_F2);
+            panel_F2.Location = new Point(15, 47);
+            panel_F2.Name = "panel_F2";
+            panel_F2.Size = new Size(830, 530);
+            panel_F2.TabIndex = 22;
+            // 
+            // groupBox_F2
+            // 
+            groupBox_F2.Location = new Point(15, 15);
+            groupBox_F2.Name = "groupBox_F2";
+            groupBox_F2.Size = new Size(800, 500);
+            groupBox_F2.TabIndex = 5;
+            groupBox_F2.TabStop = false;
+            // 
             // panel_add
             // 
             panel_add.BackColor = SystemColors.ButtonShadow;
@@ -107,7 +127,7 @@
             panel_add.Controls.Add(barcode_input);
             panel_add.Controls.Add(label1);
             panel_add.Controls.Add(button_done);
-            panel_add.Location = new Point(638, 3);
+            panel_add.Location = new Point(940, 15);
             panel_add.Name = "panel_add";
             panel_add.Size = new Size(250, 200);
             panel_add.TabIndex = 14;
@@ -281,6 +301,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1370, 749);
+            Controls.Add(panel_F2);
             Controls.Add(panel_add);
             Controls.Add(button_add);
             Controls.Add(button_sub);
@@ -295,6 +316,7 @@
             Name = "Form1";
             Text = "Form1";
             panel_F1.ResumeLayout(false);
+            panel_F2.ResumeLayout(false);
             panel_add.ResumeLayout(false);
             panel_add.PerformLayout();
             panel_special.ResumeLayout(false);
@@ -327,5 +349,7 @@
         private GroupBox groupBox_special;
         private Button button_sub;
         private Button button_add;
+        private Panel panel_F2;
+        private GroupBox groupBox_F2;
     }
 }

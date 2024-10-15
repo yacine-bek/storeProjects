@@ -5,103 +5,40 @@ namespace storeProjects
     public partial class Form1 : Form
     {
 
-
-
-
-
-
-        private void YourForm_KeyDown(object sender, KeyEventArgs e)
-        {   
-            switch (e.KeyCode)
-            {
-                case Keys.Subtract:
-                    button_sub.PerformClick();
-                    break;
-                case Keys.Add: 
-                    button_add.PerformClick();
-                    break;
-                case Keys.Escape:
-                    input_barcode.Focus();
-                    break;
-                case Keys.F1:
-                    if (button_F1.Focus() == false)
-                    {
-                        input_barcode.Text = "-";
-                        button_F1.PerformClick();
-                        input_barcode.Focus();
-                    }
-                    break;
-                case Keys.F2:
-                    if (button_F2.Focus()==false)
-                    {
-                        input_barcode.Text = "-";
-                        button_F2.PerformClick();
-                        input_barcode.Focus();
-                    }
-                    
-                    break;
-                case Keys.Space:
-                    input_barcode.Focus();
-                    break;
-                case Keys.Enter:
-                    button_done.PerformClick();
-                    button_next.PerformClick();
-                    break;
-            }
+        public Form1()
+        {
+            InitializeComponent();
+            ReadProducts();
+            nbr = producte_lenght();
+            panel_add.Visible = false;
+            special_panel_filling();
+            this.KeyDown += new KeyEventHandler(YourForm_KeyDown);
+            this.Focus();
+            input_barcode.Focus();
         }
 
-
-
-        //trash------------------
+        //dont need it any more
         private void panel_F2_Paint(object sender, PaintEventArgs e)
         {
         }
         private void button_F1_Click(object sender, EventArgs e)
         {
             panel_F1.Visible = true;
+            panel_F2.Visible = false;
+            update_total_price_c1();
         }
         private void button_F2_Click(object sender, EventArgs e)
         {
             panel_F1.Visible = false;
+            panel_F2.Visible = true;
+            update_total_price_c2();
         }
         private void add_button_Click(object sender, EventArgs e)
         {
             panel_add.Visible = true;
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
 
-        }
-        //-------------------------------
-        public class Products
-        {
-            public double price;
-            public string name;
-            public string barcode;
-            public bool special;
-            public Products(string name, double price, string barcode, bool special)
-            {
-                this.name = name;
-                this.barcode = barcode;
-                this.price = price;
-                this.special = special;
-            }
-        }
-        public class Clent : Products
-        {
-            public int quantity;
-            public Clent(string name, double price, string barcode, bool special, int quantity) : base(name, price, barcode, special)
-            {
-                this.quantity = quantity;
-            }
-        }
-        private Products[] products = new Products[100];
-        private Clent[] curent_client1 = new Clent[100];
-        private Clent[] curent_client2 = new Clent[100];
-        private int c1 = 0;
-        private int c2 = 0;
-        private int nbr = 0;
-        //function*------------------------
+
         private void SaveProducts()
         {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Products.dat");
@@ -143,7 +80,6 @@ namespace storeProjects
                 }
             }
         }
-
         private void ReadProducts()
         {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Products.dat");
@@ -180,7 +116,6 @@ namespace storeProjects
                 // Erooooree
             }
         }
-
         private int producte_lenght()
         {
             ReadProducts();
@@ -195,19 +130,14 @@ namespace storeProjects
             return lenght;
         }
 
-        //--------------------------------------------
-        public Form1()
+        private void cancel_adding_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
-            ReadProducts();
-            nbr = producte_lenght();
+            barcode_input.Text = "";
+            name_input.Text = "";
+            price_input.Text = "";
+            special_check.Checked = false;
             panel_add.Visible = false;
-            special_panel_filling();
-            this.KeyDown += new KeyEventHandler(YourForm_KeyDown);
-            this.Focus();
-            input_barcode.Focus();
         }
-
 
         private void button_done_Click(object sender, EventArgs e)
         {
@@ -240,6 +170,101 @@ namespace storeProjects
             }
         }
 
+        private void YourForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Subtract:
+                    button_sub.PerformClick();
+                    break;
+                case Keys.Add:
+                    button_add.PerformClick();
+                    break;
+                case Keys.Escape:
+                    input_barcode.Focus();
+                    break;
+                case Keys.F1:
+                    if (button_F1.Focus() == false)
+                    {
+                        input_barcode.Text = "-";
+                        button_F1.PerformClick();
+                        input_barcode.Focus();
+                    }
+                    break;
+                case Keys.F2:
+                    if (button_F2.Focus() == false)
+                    {
+                        input_barcode.Text = "-";
+                        button_F2.PerformClick();
+                        input_barcode.Focus();
+                    }
+
+                    break;
+                case Keys.Space:
+                    input_barcode.Focus();
+                    break;
+                case Keys.Enter:
+                    button_done.PerformClick();
+                    button_next.PerformClick();
+                    break;
+            }
+        }
+
+        private bool check_product_existence(String bcode)
+        {
+            for (int i = 0; i < producte_lenght(); i++)
+            {
+                if (bcode == products[i].barcode)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void error_screen(String message, String title)
+        {
+            MessageBox.Show(message, title);
+
+        }
+
+        //trash------------------
+
+        //-------------------------------
+        public class Products
+        {
+            public double price;
+            public string name;
+            public string barcode;
+            public bool special;
+            public Products(string name, double price, string barcode, bool special)
+            {
+                this.name = name;
+                this.barcode = barcode;
+                this.price = price;
+                this.special = special;
+            }
+        }
+        public class Clent : Products
+        {
+            public int quantity;
+            public Clent(string name, double price, string barcode, bool special, int quantity) : base(name, price, barcode, special)
+            {
+                this.quantity = quantity;
+            }
+        }
+        private Products[] products = new Products[100];
+        private Clent[] curent_client1 = new Clent[100];
+        private Clent[] curent_client2 = new Clent[100];
+        private int c1 = 0;
+        private int c2 = 0;
+        private int nbr = 0;
+        //function*------------------------
+        
+
+        //--------------------------------------------
+        
+
         private bool check_curent_client_1(string code)
         {
             for (int j = 0; j < c1; j++)
@@ -253,15 +278,21 @@ namespace storeProjects
             }
             return false;
         }
-
-        private void cancel_adding_Click(object sender, EventArgs e)
+        private bool check_curent_client_2(string code)
         {
-            barcode_input.Text = "";
-            name_input.Text = "";
-            price_input.Text = "";
-            special_check.Checked = false;
-            panel_add.Visible = false;
+            for (int j = 0; j < c2; j++)
+            {
+                if (code == curent_client2[j].barcode)
+                {
+                    curent_client2[j].quantity++;
+                    input_barcode.Text = "";
+                    return true;
+                }
+            }
+            return false;
         }
+
+
 
 
         private void updateBox1()
@@ -269,12 +300,31 @@ namespace storeProjects
             groupBox_F1.Controls.Clear();
             for (int j = 0; j < c1; j++)
             {
-                creatGroupbox(curent_client1[j].name, curent_client1[j].quantity, curent_client1[j].price, j + 1, j);
+                creatGroupbox1(curent_client1[j].name, curent_client1[j].quantity, curent_client1[j].price, j + 1, j);
+            }
+
+        }
+        private void updateBox2()
+        {
+            groupBox_F2.Controls.Clear();
+            for (int j = 0; j < c2; j++)
+            {
+                creatGroupbox2(curent_client2[j].name, curent_client2[j].quantity, curent_client2[j].price, j + 1, j);
             }
 
         }
 
-        private void creatGroupbox(string n, int q, double p, int clasment, int j)
+
+
+
+
+
+
+
+
+
+
+        private void creatGroupbox1(string n, int q, double p, int clasment, int j)
         {
             //creat group box
             GroupBox groupbox = new GroupBox();
@@ -333,7 +383,78 @@ namespace storeProjects
 
             groupBox_F1.Controls.Add(groupbox);
         }
-        private void update_total_price()
+
+        private void creatGroupbox2(string n, int q, double p, int clasment, int j)
+        {
+            //creat group box
+            GroupBox groupbox = new GroupBox();
+            groupbox.Text = "";
+            groupbox.Size = new Size(390, 40);
+            if (j < 12)
+            {
+                groupbox.Location = new Point(0, 40 * j);
+            }
+            else
+            {
+                groupbox.Location = new Point(410, (40 * j) - 40 * 11);
+            }
+
+            //creat lable
+            Label label = new Label();
+            label.Text = clasment + ".";
+            label.Size = new Size(16, 15);
+            label.Location = new Point(0, 12);
+            groupbox.Controls.Add(label);
+
+            //creat name product text box
+            TextBox name = new TextBox();
+            name.Text = n;
+            name.Size = new Size(187, 38);
+            name.Font = new Font("Arial", 17);
+            name.Location = new Point(22, 8);
+            name.ReadOnly = true;
+            groupbox.Controls.Add(name);
+
+            //creat quantity product text box
+            TextBox quantity = new TextBox();
+            quantity.Text = q.ToString();
+            quantity.Size = new Size(39, 38);
+            quantity.Location = new Point(208, 8);
+            quantity.Font = new Font("Arial", 17);
+            quantity.ReadOnly = true;
+            groupbox.Controls.Add(quantity);
+
+            //creat price product text box
+            TextBox price = new TextBox();
+            price.Text = (q * p).ToString() + " DA";
+            price.Size = new Size(108, 38);
+            price.Location = new Point(245, 8);
+            price.Font = new Font("Arial", 17);
+            price.ReadOnly = true;
+            groupbox.Controls.Add(price);
+
+            //creat delete button
+            Button button = new Button();
+            button.Text = "X";
+            button.Size = new Size(40, 40);
+            button.Location = new Point(350, 5);
+            groupbox.Controls.Add(button);
+
+
+            groupBox_F2.Controls.Add(groupbox);
+        }
+
+
+
+
+
+
+
+
+
+
+
+        private void update_total_price_c1()
         {
             double total = 0;
             for (int j = 0; j < c1; j++)
@@ -342,65 +463,175 @@ namespace storeProjects
             }
             price_output.Text = total.ToString() + " DA";
         }
-        private bool check_product_existence(String bcode)
+
+        private void update_total_price_c2()
         {
-            for (int i = 0; i < producte_lenght(); i++)
+            double total = 0;
+            for (int j = 0; j < c2; j++)
             {
-                if (bcode == products[i].barcode)
-                {
-                    return true;
-                }
+                total += curent_client2[j].price * curent_client2[j].quantity;
             }
-            return false;
+            price_output.Text = total.ToString() + " DA";
         }
+
+
+
+
+
+
+
+
+
+
+
+        
         private void input_barcode_TextChanged_1(object sender, EventArgs e)
         {
-            if (input_barcode.Text=="+")
+            if (input_barcode.Text == "+")
             {
                 this.ActiveControl = null;
                 input_barcode.Text = "";
             }
-            else if(input_barcode.Text=="-")
+            else if (input_barcode.Text == "-")
             {
                 this.ActiveControl = null;
                 input_barcode.Text = "";
             }
             ReadProducts();
-            if (check_product_existence(input_barcode.Text) == true)
+            if (panel_F1.Visible==true)
             {
-                if (check_curent_client_1(input_barcode.Text) == false)
+                if (check_product_existence(input_barcode.Text) == true)
                 {
-                    for (int j = 0; j < producte_lenght(); j++)
+                    if (check_curent_client_1(input_barcode.Text) == false)
                     {
-                        if (input_barcode.Text == products[j].barcode)
+                        for (int j = 0; j < producte_lenght(); j++)
                         {
-                            curent_client1[c1] = new Clent(products[j].name, Convert.ToDouble(products[j].price), products[j].barcode, products[j].special, 1);
+                            if (input_barcode.Text == products[j].barcode)
+                            {
+                                curent_client1[c1] = new Clent(products[j].name, Convert.ToDouble(products[j].price), products[j].barcode, products[j].special, 1);
 
-                            c1++;
-                            input_barcode.Text = "";
+                                c1++;
+                                input_barcode.Text = "";
+                            }
                         }
                     }
+                    updateBox1();
+                    update_total_price_c1();
                 }
-                updateBox1();
-                update_total_price();
+            }
+            else
+            {
+                if (check_product_existence(input_barcode.Text) == true)
+                {
+                    if (check_curent_client_2(input_barcode.Text) == false)
+                    {
+                        for (int j = 0; j < producte_lenght(); j++)
+                        {
+                            if (input_barcode.Text == products[j].barcode)
+                            {
+                                curent_client2[c2] = new Clent(products[j].name, Convert.ToDouble(products[j].price), products[j].barcode, products[j].special, 1);
+
+                                c2++;
+                                input_barcode.Text = "";
+                            }
+                        }
+                    }
+                    updateBox2();
+                    update_total_price_c2();
+                }
             }
 
+
+
+
         }
+
+
+
+
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            try
+            if (panel_F1.Visible==true)
             {
-                curent_client1[c1 - 1].quantity++;
-                updateBox1();
-                update_total_price();
+                try
+                {
+                    curent_client1[c1 - 1].quantity++;
+                    updateBox1();
+                    update_total_price_c1();
+                }
+                catch
+                {
+                    //there is a problem
+                }
+                this.ActiveControl = null;
             }
-            catch
+            else
             {
-                //there is a problem
+                try
+                {
+                    curent_client2[c2 - 1].quantity++;
+                    updateBox2();
+                    update_total_price_c2();
+                }
+                catch
+                {
+                    //there is a problem
+                }
+                this.ActiveControl = null;
             }
-            this.ActiveControl = null;
+
         }
+
+        private void button_sub_Click(object sender, EventArgs e)
+        {
+            if (panel_F1.Visible==true)
+            {
+                try
+                {
+                    if (curent_client1[c1 - 1].quantity == 1)
+                    {
+                        c1--;
+                    }
+                    else
+                    {
+                        curent_client1[c1 - 1].quantity--;
+                    }
+                    updateBox1();
+                    update_total_price_c1();
+                }
+                catch
+                {
+                    //there is a problem
+                }
+                this.ActiveControl = null;
+            }
+            else
+            {
+                try
+                {
+                    if (curent_client2[c2 - 1].quantity == 1)
+                    {
+                        c2--;
+                    }
+                    else
+                    {
+                        curent_client2[c2 - 1].quantity--;
+                    }
+                    updateBox2();
+                    update_total_price_c2();
+                }
+                catch
+                {
+                    //there is a problem
+                }
+                this.ActiveControl = null;
+            }
+        }
+
+
+
+
         private void special_panel_filling()
         {
             int k = 0;
@@ -421,37 +652,23 @@ namespace storeProjects
         }
 
 
-        private void button_sub_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (curent_client1[c1 - 1].quantity == 1)
-                {
-                    c1--;
-                }
-                else
-                {
-                    curent_client1[c1 - 1].quantity--;
-                }
-                updateBox1();
-                update_total_price();
-            }
-            catch
-            {
-                //there is a problem
-            }
-            this.ActiveControl = null;
-        }
-        private void error_screen(String message , String title) 
-        {
-            MessageBox.Show(message, title);
 
-        }
+
+        
         private void button_next_Click(object sender, EventArgs e)
         {
-            groupBox_F1.Controls.Clear();
-            c1 = 0;
-            update_total_price();
+            if (panel_F1.Visible==true)
+            {
+                groupBox_F1.Controls.Clear();
+                c1 = 0;
+                update_total_price_c1();
+            }
+            else
+            {
+                groupBox_F2.Controls.Clear();
+                c2 = 0;
+                update_total_price_c2();
+            }
         }
     }
 }
