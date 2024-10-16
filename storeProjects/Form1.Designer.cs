@@ -32,9 +32,9 @@
             button_F2 = new Button();
             button_F1 = new Button();
             panel_F1 = new Panel();
-            groupBox_F1 = new GroupBox();
+            groupBox_F1 = new BorderlessGroupBox();
             panel_F2 = new Panel();
-            groupBox_F2 = new GroupBox();
+            groupBox_F2 = new BorderlessGroupBox();
             panel_add = new Panel();
             cancel_adding = new Button();
             special_check = new CheckBox();
@@ -51,7 +51,7 @@
             contextMenuStrip1 = new ContextMenuStrip(components);
             price_output = new TextBox();
             panel_special = new Panel();
-            groupBox_special = new GroupBox();
+            groupBox_special = new BorderlessGroupBox();
             button_sub = new Button();
             button_add = new Button();
             label4 = new Label();
