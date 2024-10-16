@@ -11,11 +11,31 @@ namespace storeProjects
             ReadProducts();
             nbr = producte_lenght();
             panel_add.Visible = false;
+            panel_F2.Visible = false;
             special_panel_filling();
             this.KeyDown += new KeyEventHandler(YourForm_KeyDown);
             this.Focus();
             input_barcode.Focus();
+            this.ActiveControl = null;
+            //-tryyyyyyyyyyy
+            this.Click += new EventHandler(panel_F1_Click);
         }
+
+
+        private void panel_F1_Click(object sender, EventArgs e)
+        {
+            // Cast sender to Panel to access the MouseEventArgs
+            Panel panel = sender as Panel;
+
+            // Get the mouse position from the event arguments
+            MouseEventArgs me = e as MouseEventArgs;
+            this.ActiveControl = null;
+            panel_add.Visible = false;
+        }
+
+
+
+
 
         //dont need it any more
         private void panel_F2_Paint(object sender, PaintEventArgs e)
@@ -23,12 +43,14 @@ namespace storeProjects
         }
         private void button_F1_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = null;
             panel_F1.Visible = true;
             panel_F2.Visible = false;
             update_total_price_c1();
         }
         private void button_F2_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = null;
             panel_F1.Visible = false;
             panel_F2.Visible = true;
             update_total_price_c2();
@@ -36,8 +58,8 @@ namespace storeProjects
         private void add_button_Click(object sender, EventArgs e)
         {
             panel_add.Visible = true;
+            this.ActiveControl = null;
         }
-
 
         private void SaveProducts()
         {
@@ -132,6 +154,7 @@ namespace storeProjects
 
         private void cancel_adding_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = null;
             barcode_input.Text = "";
             name_input.Text = "";
             price_input.Text = "";
@@ -141,32 +164,37 @@ namespace storeProjects
 
         private void button_done_Click(object sender, EventArgs e)
         {
+            this.ActiveControl = null;
             try
-            {
-                products[nbr] = new Products(name_input.Text, Convert.ToDouble(price_input.Text), barcode_input.Text, special_check.Checked);
-                if (products[nbr].special == true)
-                {
-                    special_panel_filling();
-                }
-                nbr++;
-                barcode_input.Text = "";
-                name_input.Text = "";
-                price_input.Text = "";
-                special_check.Checked = false;
-                panel_add.Visible = false;
-                input_barcode.Text = "";
-                SaveProducts();
-            }
-            catch
             {
                 if (barcode_input.Text == "" || name_input.Text == "" || price_input.Text == "")
                 {
                     error_screen("you gotta fill every thing HAHA", "Fill this shit");
                 }
+                else if (special_check.Checked == true && (Convert.ToDouble(barcode_input.Text)<9 || Convert.ToDouble(barcode_input.Text)>100))
+                {
+                    error_screen("The special bar code must have Two degits", "This is a special Product!!");
+                }
                 else
                 {
-                    error_screen("You've inserted wrong data", "Wrong Data");
+                    products[nbr] = new Products(name_input.Text, Convert.ToDouble(price_input.Text), barcode_input.Text, special_check.Checked);
+                    if (products[nbr].special == true)
+                    {
+                        special_panel_filling();
+                    }
+                    nbr++;
+                    barcode_input.Text = "";
+                    name_input.Text = "";
+                    price_input.Text = "";
+                    special_check.Checked = false;
+                    panel_add.Visible = false;
+                    input_barcode.Text = "";
+                    SaveProducts();
                 }
+            }
+            catch
+            {
+                error_screen("You've inserted wrong data", "Wrong Data");
             }
         }
 
@@ -184,28 +212,16 @@ namespace storeProjects
                     input_barcode.Focus();
                     break;
                 case Keys.F1:
-                    if (button_F1.Focus() == false)
-                    {
-                        input_barcode.Text = "-";
-                        button_F1.PerformClick();
-                        input_barcode.Focus();
-                    }
+                    button_F1.PerformClick();
                     break;
                 case Keys.F2:
-                    if (button_F2.Focus() == false)
-                    {
-                        input_barcode.Text = "-";
-                        button_F2.PerformClick();
-                        input_barcode.Focus();
-                    }
-
+                    button_F2.PerformClick();
                     break;
                 case Keys.Space:
                     input_barcode.Focus();
                     break;
                 case Keys.Enter:
-                    button_done.PerformClick();
-                    button_next.PerformClick();
+
                     break;
             }
         }
@@ -225,12 +241,9 @@ namespace storeProjects
         private void error_screen(String message, String title)
         {
             MessageBox.Show(message, title);
-
+            this.ActiveControl = null;
         }
-
-        //trash------------------
-
-        //-------------------------------
+        //trash hhh ----------------------
         public class Products
         {
             public double price;
@@ -259,12 +272,7 @@ namespace storeProjects
         private int c1 = 0;
         private int c2 = 0;
         private int nbr = 0;
-        //function*------------------------
-        
-
-        //--------------------------------------------
-        
-
+        //lkhdmaaaaaaaaaa
         private bool check_curent_client_1(string code)
         {
             for (int j = 0; j < c1; j++)
@@ -298,33 +306,31 @@ namespace storeProjects
         private void updateBox1()
         {
             groupBox_F1.Controls.Clear();
-            for (int j = 0; j < c1; j++)
+            int j = 0;
+            for (int i = 0; i < c1; i++)
             {
-                creatGroupbox1(curent_client1[j].name, curent_client1[j].quantity, curent_client1[j].price, j + 1, j);
+                if (curent_client1[i].quantity!=0)
+                {
+                    creatGroupbox1(curent_client1[i].name, curent_client1[i].quantity, curent_client1[i].price, j + 1, j , i);
+                    j++;
+                }
             }
-
         }
         private void updateBox2()
         {
             groupBox_F2.Controls.Clear();
-            for (int j = 0; j < c2; j++)
+            int j = 0;
+            for (int i = 0; i < c2; i++)
             {
-                creatGroupbox2(curent_client2[j].name, curent_client2[j].quantity, curent_client2[j].price, j + 1, j);
+                if (curent_client2[i].quantity != 0)
+                {
+                    creatGroupbox2(curent_client2[i].name, curent_client2[i].quantity, curent_client2[i].price, j + 1, j , i);
+                    j++;
+                }
             }
-
         }
 
-
-
-
-
-
-
-
-
-
-
-        private void creatGroupbox1(string n, int q, double p, int clasment, int j)
+        private void creatGroupbox1(string n, int q, double p, int clasment, int j,int i)
         {
             //creat group box
             GroupBox groupbox = new GroupBox();
@@ -378,13 +384,13 @@ namespace storeProjects
             button.Text = "X";
             button.Size = new Size(40, 40);
             button.Location = new Point(350, 5);
+            button.Click += (sender, e) => { curent_client1[i].quantity = 0; updateBox1(); update_total_price_c1(); this.ActiveControl = null; };
             groupbox.Controls.Add(button);
-
 
             groupBox_F1.Controls.Add(groupbox);
         }
-
-        private void creatGroupbox2(string n, int q, double p, int clasment, int j)
+        
+        private void creatGroupbox2(string n, int q, double p, int clasment, int j,int i)
         {
             //creat group box
             GroupBox groupbox = new GroupBox();
@@ -438,21 +444,12 @@ namespace storeProjects
             button.Text = "X";
             button.Size = new Size(40, 40);
             button.Location = new Point(350, 5);
+            button.Click += (sender, e) => { curent_client2[i].quantity = 0; updateBox2(); update_total_price_c2(); this.ActiveControl = null; };
             groupbox.Controls.Add(button);
 
 
             groupBox_F2.Controls.Add(groupbox);
         }
-
-
-
-
-
-
-
-
-
-
 
         private void update_total_price_c1()
         {
@@ -474,17 +471,6 @@ namespace storeProjects
             price_output.Text = total.ToString() + " DA";
         }
 
-
-
-
-
-
-
-
-
-
-
-        
         private void input_barcode_TextChanged_1(object sender, EventArgs e)
         {
             if (input_barcode.Text == "+")
@@ -498,7 +484,7 @@ namespace storeProjects
                 input_barcode.Text = "";
             }
             ReadProducts();
-            if (panel_F1.Visible==true)
+            if (panel_F1.Visible == true)
             {
                 if (check_product_existence(input_barcode.Text) == true)
                 {
@@ -540,19 +526,11 @@ namespace storeProjects
                     update_total_price_c2();
                 }
             }
-
-
-
-
         }
-
-
-
-
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            if (panel_F1.Visible==true)
+            if (panel_F1.Visible == true)
             {
                 try
                 {
@@ -585,7 +563,7 @@ namespace storeProjects
 
         private void button_sub_Click(object sender, EventArgs e)
         {
-            if (panel_F1.Visible==true)
+            if (panel_F1.Visible == true)
             {
                 try
                 {
@@ -629,9 +607,6 @@ namespace storeProjects
             }
         }
 
-
-
-
         private void special_panel_filling()
         {
             int k = 0;
@@ -651,13 +626,10 @@ namespace storeProjects
             }
         }
 
-
-
-
-        
         private void button_next_Click(object sender, EventArgs e)
         {
-            if (panel_F1.Visible==true)
+            this.ActiveControl = null;
+            if (panel_F1.Visible == true)
             {
                 groupBox_F1.Controls.Clear();
                 c1 = 0;
@@ -669,6 +641,15 @@ namespace storeProjects
                 c2 = 0;
                 update_total_price_c2();
             }
+        }
+
+        private void special_check_CheckedChanged(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+        }
+
+        private void price_output_TextChanged(object sender, EventArgs e)
+        {
         }
     }
 }

@@ -54,6 +54,7 @@
             groupBox_special = new GroupBox();
             button_sub = new Button();
             button_add = new Button();
+            label4 = new Label();
             panel_F1.SuspendLayout();
             panel_F2.SuspendLayout();
             panel_add.SuspendLayout();
@@ -151,6 +152,7 @@
             special_check.TabIndex = 7;
             special_check.Text = "special?";
             special_check.UseVisualStyleBackColor = true;
+            special_check.CheckedChanged += special_check_CheckedChanged;
             // 
             // name_input
             // 
@@ -256,6 +258,7 @@
             price_output.Size = new Size(830, 96);
             price_output.TabIndex = 18;
             price_output.TextAlign = HorizontalAlignment.Center;
+            price_output.TextChanged += price_output_TextChanged;
             // 
             // panel_special
             // 
@@ -296,6 +299,15 @@
             button_add.UseVisualStyleBackColor = true;
             button_add.Click += button_add_Click;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(851, 33);
+            label4.Name = "label4";
+            label4.Size = new Size(97, 15);
+            label4.TabIndex = 23;
+            label4.Text = "Special Products:";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -313,6 +325,7 @@
             Controls.Add(panel_F1);
             Controls.Add(button_F2);
             Controls.Add(button_F1);
+            Controls.Add(label4);
             Name = "Form1";
             Text = "Form1";
             panel_F1.ResumeLayout(false);
@@ -351,5 +364,6 @@
         private Button button_add;
         private Panel panel_F2;
         private GroupBox groupBox_F2;
+        private Label label4;
     }
 }
