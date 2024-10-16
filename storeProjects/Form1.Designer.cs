@@ -55,10 +55,26 @@
             button_sub = new Button();
             button_add = new Button();
             label4 = new Label();
+            button_delete_element = new Button();
+            button_edit_element = new Button();
+            panel_delete = new Panel();
+            label5 = new Label();
+            textBox_barcode_delete = new TextBox();
+            button_confirm_delete = new Button();
+            panel_editing = new Panel();
+            label8 = new Label();
+            label7 = new Label();
+            textBox_editing_price = new TextBox();
+            textBox_editing_name = new TextBox();
+            label6 = new Label();
+            textBox_editing_barcode = new TextBox();
+            button_editing_confirm = new Button();
             panel_F1.SuspendLayout();
             panel_F2.SuspendLayout();
             panel_add.SuspendLayout();
             panel_special.SuspendLayout();
+            panel_delete.SuspendLayout();
+            panel_editing.SuspendLayout();
             SuspendLayout();
             // 
             // button_F2
@@ -308,11 +324,148 @@
             label4.TabIndex = 23;
             label4.Text = "Special Products:";
             // 
+            // button_delete_element
+            // 
+            button_delete_element.Location = new Point(1283, 475);
+            button_delete_element.Name = "button_delete_element";
+            button_delete_element.Size = new Size(75, 50);
+            button_delete_element.TabIndex = 24;
+            button_delete_element.Text = "delete";
+            button_delete_element.UseVisualStyleBackColor = true;
+            button_delete_element.Click += button_delete_element_Click;
+            // 
+            // button_edit_element
+            // 
+            button_edit_element.Location = new Point(1208, 475);
+            button_edit_element.Name = "button_edit_element";
+            button_edit_element.Size = new Size(75, 50);
+            button_edit_element.TabIndex = 25;
+            button_edit_element.Text = "Edit";
+            button_edit_element.UseVisualStyleBackColor = true;
+            button_edit_element.Click += button_edit_element_Click;
+            // 
+            // panel_delete
+            // 
+            panel_delete.BackColor = SystemColors.ButtonShadow;
+            panel_delete.Controls.Add(label5);
+            panel_delete.Controls.Add(textBox_barcode_delete);
+            panel_delete.Controls.Add(button_confirm_delete);
+            panel_delete.Location = new Point(1158, 522);
+            panel_delete.Name = "panel_delete";
+            panel_delete.Size = new Size(200, 128);
+            panel_delete.TabIndex = 26;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(23, 10);
+            label5.Name = "label5";
+            label5.Size = new Size(153, 30);
+            label5.TabIndex = 2;
+            label5.Text = "Enter the code of \r\nthe element u wanna delete";
+            label5.TextAlign = ContentAlignment.BottomCenter;
+            // 
+            // textBox_barcode_delete
+            // 
+            textBox_barcode_delete.Location = new Point(3, 52);
+            textBox_barcode_delete.Name = "textBox_barcode_delete";
+            textBox_barcode_delete.Size = new Size(194, 23);
+            textBox_barcode_delete.TabIndex = 1;
+            // 
+            // button_confirm_delete
+            // 
+            button_confirm_delete.Location = new Point(50, 84);
+            button_confirm_delete.Name = "button_confirm_delete";
+            button_confirm_delete.Size = new Size(100, 40);
+            button_confirm_delete.TabIndex = 0;
+            button_confirm_delete.Text = "Confirm";
+            button_confirm_delete.UseVisualStyleBackColor = true;
+            button_confirm_delete.Click += button_confirm_delete_Click;
+            // 
+            // panel_editing
+            // 
+            panel_editing.BackColor = SystemColors.ButtonShadow;
+            panel_editing.Controls.Add(label8);
+            panel_editing.Controls.Add(label7);
+            panel_editing.Controls.Add(textBox_editing_price);
+            panel_editing.Controls.Add(textBox_editing_name);
+            panel_editing.Controls.Add(label6);
+            panel_editing.Controls.Add(textBox_editing_barcode);
+            panel_editing.Controls.Add(button_editing_confirm);
+            panel_editing.Location = new Point(1157, 278);
+            panel_editing.Name = "panel_editing";
+            panel_editing.Size = new Size(200, 200);
+            panel_editing.TabIndex = 27;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(3, 113);
+            label8.Name = "label8";
+            label8.Size = new Size(139, 15);
+            label8.TabIndex = 6;
+            label8.Text = "New Price of the product";
+            label8.Click += label8_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(3, 69);
+            label7.Name = "label7";
+            label7.Size = new Size(125, 15);
+            label7.TabIndex = 5;
+            label7.Text = "New Name of Product";
+            // 
+            // textBox_editing_price
+            // 
+            textBox_editing_price.Location = new Point(3, 131);
+            textBox_editing_price.Name = "textBox_editing_price";
+            textBox_editing_price.Size = new Size(194, 23);
+            textBox_editing_price.TabIndex = 4;
+            // 
+            // textBox_editing_name
+            // 
+            textBox_editing_name.Location = new Point(1, 87);
+            textBox_editing_name.Name = "textBox_editing_name";
+            textBox_editing_name.Size = new Size(194, 23);
+            textBox_editing_name.TabIndex = 3;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(23, 10);
+            label6.Name = "label6";
+            label6.Size = new Size(141, 30);
+            label6.TabIndex = 2;
+            label6.Text = "Enter the code of \r\nthe element u wanna Edit";
+            label6.TextAlign = ContentAlignment.BottomCenter;
+            // 
+            // textBox_editing_barcode
+            // 
+            textBox_editing_barcode.Location = new Point(3, 43);
+            textBox_editing_barcode.Name = "textBox_editing_barcode";
+            textBox_editing_barcode.Size = new Size(194, 23);
+            textBox_editing_barcode.TabIndex = 1;
+            // 
+            // button_editing_confirm
+            // 
+            button_editing_confirm.Location = new Point(51, 165);
+            button_editing_confirm.Name = "button_editing_confirm";
+            button_editing_confirm.Size = new Size(100, 30);
+            button_editing_confirm.TabIndex = 0;
+            button_editing_confirm.Text = "Confirm";
+            button_editing_confirm.UseVisualStyleBackColor = true;
+            button_editing_confirm.Click += button1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1370, 749);
+            Controls.Add(panel_editing);
+            Controls.Add(panel_delete);
+            Controls.Add(button_edit_element);
+            Controls.Add(button_delete_element);
             Controls.Add(panel_F2);
             Controls.Add(panel_add);
             Controls.Add(button_add);
@@ -333,6 +486,10 @@
             panel_add.ResumeLayout(false);
             panel_add.PerformLayout();
             panel_special.ResumeLayout(false);
+            panel_delete.ResumeLayout(false);
+            panel_delete.PerformLayout();
+            panel_editing.ResumeLayout(false);
+            panel_editing.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -365,5 +522,19 @@
         private Panel panel_F2;
         private GroupBox groupBox_F2;
         private Label label4;
+        private Button button_delete_element;
+        private Button button_edit_element;
+        private Panel panel_delete;
+        private Label label5;
+        private TextBox textBox_barcode_delete;
+        private Button button_confirm_delete;
+        private Panel panel_editing;
+        private Label label8;
+        private Label label7;
+        private TextBox textBox_editing_price;
+        private TextBox textBox_editing_name;
+        private Label label6;
+        private TextBox textBox_editing_barcode;
+        private Button button_editing_confirm;
     }
 }

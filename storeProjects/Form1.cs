@@ -12,13 +12,15 @@ namespace storeProjects
             nbr = producte_lenght();
             panel_add.Visible = false;
             panel_F2.Visible = false;
+            panel_delete.Visible = false;
+            panel_editing.Visible = false;
             special_panel_filling();
             this.KeyDown += new KeyEventHandler(YourForm_KeyDown);
-            this.Focus();
             input_barcode.Focus();
-            this.ActiveControl = null;
+            ActiveControl = null;
             //-tryyyyyyyyyyy
             this.Click += new EventHandler(panel_F1_Click);
+
         }
 
 
@@ -31,6 +33,7 @@ namespace storeProjects
             MouseEventArgs me = e as MouseEventArgs;
             this.ActiveControl = null;
             panel_add.Visible = false;
+            panel_delete.Visible = false;
         }
 
 
@@ -67,6 +70,7 @@ namespace storeProjects
             using (FileStream fs = new FileStream(filePath, FileMode.Create))
             using (BinaryWriter writer = new BinaryWriter(fs))
             {
+                int l = 0;
                 for (int i = 0; i < products.Length; i++)
                 {
                     string price, name, code, special;
@@ -77,17 +81,55 @@ namespace storeProjects
                         name = "";
                         code = "";
                         special = "";
+
+                        writer.Write(code.Length);
+                        writer.Write(code.ToCharArray());
+
+                        writer.Write(name.Length);
+                        writer.Write(name.ToCharArray());
+
+                        writer.Write(price.Length);
+                        writer.Write(price.ToCharArray());
+
+                        writer.Write(special.Length);
+                        writer.Write(special.ToCharArray());
                     }
                     else
                     {
-                        price = products[i].price.ToString();
-                        name = products[i].name.ToString();
-                        code = products[i].barcode.ToString();
-                        special = products[i].special.ToString();
+                        if (Convert.ToInt32(products[i].barcode) == 0)
+                        {
+                            l++;
+                        }
+                        else
+                        {
+                            price = products[i].price.ToString();
+                            name = products[i].name.ToString();
+                            code = products[i].barcode.ToString();
+                            special = products[i].special.ToString();
+
+                            writer.Write(code.Length);
+                            writer.Write(code.ToCharArray());
+
+                            writer.Write(name.Length);
+                            writer.Write(name.ToCharArray());
+
+                            writer.Write(price.Length);
+                            writer.Write(price.ToCharArray());
+
+                            writer.Write(special.Length);
+                            writer.Write(special.ToCharArray());
+                        }
+
                     }
+                }
+                for (int i = 0; i <= l; i++)
+                {
+                    string price, name, code, special;
+                    price = "";
+                    name = "";
+                    code = "";
+                    special = "";
 
-
-                    // Write the length of each string followed by the string itself
                     writer.Write(code.Length);
                     writer.Write(code.ToCharArray());
 
@@ -99,6 +141,7 @@ namespace storeProjects
 
                     writer.Write(special.Length);
                     writer.Write(special.ToCharArray());
+
                 }
             }
         }
@@ -171,7 +214,7 @@ namespace storeProjects
                 {
                     error_screen("you gotta fill every thing HAHA", "Fill this shit");
                 }
-                else if (special_check.Checked == true && (Convert.ToDouble(barcode_input.Text)<9 || Convert.ToDouble(barcode_input.Text)>100))
+                else if (special_check.Checked == true && (Convert.ToDouble(barcode_input.Text) < 9 || Convert.ToDouble(barcode_input.Text) > 100))
                 {
                     error_screen("The special bar code must have Two degits", "This is a special Product!!");
                 }
@@ -221,7 +264,7 @@ namespace storeProjects
                     input_barcode.Focus();
                     break;
                 case Keys.Enter:
-
+                    button_next.PerformClick();
                     break;
             }
         }
@@ -309,9 +352,9 @@ namespace storeProjects
             int j = 0;
             for (int i = 0; i < c1; i++)
             {
-                if (curent_client1[i].quantity!=0)
+                if (curent_client1[i].quantity != 0)
                 {
-                    creatGroupbox1(curent_client1[i].name, curent_client1[i].quantity, curent_client1[i].price, j + 1, j , i);
+                    creatGroupbox1(curent_client1[i].name, curent_client1[i].quantity, curent_client1[i].price, j + 1, j, i);
                     j++;
                 }
             }
@@ -324,13 +367,13 @@ namespace storeProjects
             {
                 if (curent_client2[i].quantity != 0)
                 {
-                    creatGroupbox2(curent_client2[i].name, curent_client2[i].quantity, curent_client2[i].price, j + 1, j , i);
+                    creatGroupbox2(curent_client2[i].name, curent_client2[i].quantity, curent_client2[i].price, j + 1, j, i);
                     j++;
                 }
             }
         }
 
-        private void creatGroupbox1(string n, int q, double p, int clasment, int j,int i)
+        private void creatGroupbox1(string n, int q, double p, int clasment, int j, int i)
         {
             //creat group box
             GroupBox groupbox = new GroupBox();
@@ -389,8 +432,8 @@ namespace storeProjects
 
             groupBox_F1.Controls.Add(groupbox);
         }
-        
-        private void creatGroupbox2(string n, int q, double p, int clasment, int j,int i)
+
+        private void creatGroupbox2(string n, int q, double p, int clasment, int j, int i)
         {
             //creat group box
             GroupBox groupbox = new GroupBox();
@@ -614,13 +657,31 @@ namespace storeProjects
             {
                 if (products[i].special == true)
                 {
-                    TextBox special = new TextBox();
-                    special.Text = products[i].name + "   " + products[i].price.ToString() + " DA";
-                    special.Size = new Size(270, 40);
-                    special.Font = new Font("Arial", 17);
-                    special.Location = new Point(0, 35 * k);
-                    special.ReadOnly = true;
-                    groupBox_special.Controls.Add(special);
+                    TextBox special_code = new TextBox();
+                    special_code.Text = products[i].barcode + ".";
+                    special_code.Size = new Size(40, 40);
+                    special_code.Font = new Font("Arial", 17);
+                    special_code.Location = new Point(0, 35 * k);
+                    special_code.TextAlign = HorizontalAlignment.Center;
+                    special_code.ReadOnly = true;
+
+                    TextBox special_name = new TextBox();
+                    special_name.Text = products[i].name;
+                    special_name.Size = new Size(110, 40);
+                    special_name.Font = new Font("Arial", 17);
+                    special_name.Location = new Point(40, 35 * k);
+                    special_name.ReadOnly = true;
+
+                    TextBox special_price = new TextBox();
+                    special_price.Text = products[i].price + " DA";
+                    special_price.Size = new Size(120, 40);
+                    special_price.Font = new Font("Arial", 17);
+                    special_price.Location = new Point(150, 35 * k);
+                    special_price.ReadOnly = true;
+
+                    groupBox_special.Controls.Add(special_price);
+                    groupBox_special.Controls.Add(special_code);
+                    groupBox_special.Controls.Add(special_name);
                     k++;
                 }
             }
@@ -650,6 +711,103 @@ namespace storeProjects
 
         private void price_output_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void button_delete_element_Click(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+            panel_delete.Visible = true;
+        }
+
+        private void button_confirm_delete_Click(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+            if (check_product_existence(textBox_barcode_delete.Text) == true)
+            {
+                for (int m = 0; m < producte_lenght(); m++)
+                {
+                    if (products[m].barcode == textBox_barcode_delete.Text)
+                    {
+                        products[m].barcode = "0";
+                        SaveProducts();
+                    }
+                }
+            }
+            else
+            {
+                error_screen("This product doesn't exist", "Unfound");
+            }
+            textBox_barcode_delete.Text = "";
+            panel_delete.Visible = false;
+        }
+
+        private void button_edit_element_Click(object sender, EventArgs e)
+        {
+            panel_editing.Visible = true;
+            this.ActiveControl = null;
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+            
+            if (textBox_editing_barcode.Text== "")
+            {
+                error_screen("Enter the bare code", "error");
+            }
+            else
+            {
+                if (check_product_existence(textBox_editing_barcode.Text) == false)
+                {
+                    error_screen("This product doesn't exist", "Unfound");
+                }
+                else
+                {
+                    for (int i = 0; i < producte_lenght(); i++)
+                    {
+                        if (products[i].barcode == textBox_editing_barcode.Text)
+                        {
+                            String tmp_name = products[i].name;
+                            double tmp_price = products[i].price;
+                            String tmp_barcode = products[i].barcode;
+                            Boolean tmp_special = products[i].special;
+                            if (textBox_editing_name.Text.Length>1)
+                            {
+                                tmp_name = textBox_editing_name.Text;
+                                products[i]= new Products(tmp_name, tmp_price, tmp_barcode, tmp_special);
+                                SaveProducts();
+                                special_panel_filling();
+                            }
+                            if (textBox_editing_price.Text.Length>1)
+                            {
+                                try
+                                {
+                                    tmp_price = Convert.ToDouble(textBox_editing_price.Text);
+                                    products[i] = new Products(tmp_name, tmp_price, tmp_barcode, tmp_special);
+                                    SaveProducts();
+                                    special_panel_filling();
+                                }
+                                catch
+                                {
+                                    error_screen("You've inserted wrong data", "Wrong Data");
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            
+            textBox_editing_barcode.Text = "";
+            textBox_editing_name.Text = "";
+            textBox_editing_price.Text = "";
+            panel_editing.Visible = false;
         }
     }
 }
