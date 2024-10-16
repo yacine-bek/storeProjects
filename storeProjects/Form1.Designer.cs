@@ -79,22 +79,26 @@
             // 
             // button_F2
             // 
-            button_F2.Location = new Point(115, 15);
+            button_F2.BackColor = SystemColors.ControlLight;
+            button_F2.FlatStyle = FlatStyle.Flat;
+            button_F2.Location = new Point(121, 15);
             button_F2.Name = "button_F2";
             button_F2.Size = new Size(100, 35);
             button_F2.TabIndex = 7;
             button_F2.Text = "F2";
-            button_F2.UseVisualStyleBackColor = true;
+            button_F2.UseVisualStyleBackColor = false;
             button_F2.Click += button_F2_Click;
             // 
             // button_F1
             // 
-            button_F1.Location = new Point(15, 15);
+            button_F1.BackColor = SystemColors.ControlDark;
+            button_F1.FlatStyle = FlatStyle.Flat;
+            button_F1.Location = new Point(18, 15);
             button_F1.Name = "button_F1";
             button_F1.Size = new Size(100, 35);
             button_F1.TabIndex = 6;
             button_F1.Text = "F1";
-            button_F1.UseVisualStyleBackColor = true;
+            button_F1.UseVisualStyleBackColor = false;
             button_F1.Click += button_F1_Click;
             // 
             // panel_F1
@@ -126,6 +130,7 @@
             // 
             // groupBox_F2
             // 
+            groupBox_F2.FlatStyle = FlatStyle.Flat;
             groupBox_F2.Location = new Point(15, 15);
             groupBox_F2.Name = "groupBox_F2";
             groupBox_F2.Size = new Size(800, 500);
@@ -144,7 +149,7 @@
             panel_add.Controls.Add(barcode_input);
             panel_add.Controls.Add(label1);
             panel_add.Controls.Add(button_done);
-            panel_add.Location = new Point(940, 15);
+            panel_add.Location = new Point(954, 15);
             panel_add.Name = "panel_add";
             panel_add.Size = new Size(250, 200);
             panel_add.TabIndex = 14;
@@ -233,6 +238,7 @@
             // 
             // add_button
             // 
+            add_button.FlatStyle = FlatStyle.Flat;
             add_button.Location = new Point(1208, 15);
             add_button.Name = "add_button";
             add_button.Size = new Size(150, 50);
@@ -252,6 +258,7 @@
             // 
             // button_next
             // 
+            button_next.FlatStyle = FlatStyle.Flat;
             button_next.Location = new Point(1208, 687);
             button_next.Name = "button_next";
             button_next.Size = new Size(150, 50);
@@ -306,6 +313,7 @@
             // 
             // button_add
             // 
+            button_add.FlatStyle = FlatStyle.System;
             button_add.Font = new Font("Segoe UI", 25F);
             button_add.Location = new Point(1208, 550);
             button_add.Name = "button_add";
@@ -350,7 +358,7 @@
             panel_delete.Controls.Add(label5);
             panel_delete.Controls.Add(textBox_barcode_delete);
             panel_delete.Controls.Add(button_confirm_delete);
-            panel_delete.Location = new Point(1158, 522);
+            panel_delete.Location = new Point(1157, 531);
             panel_delete.Name = "panel_delete";
             panel_delete.Size = new Size(200, 128);
             panel_delete.TabIndex = 26;
@@ -462,8 +470,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1370, 749);
-            Controls.Add(panel_editing);
             Controls.Add(panel_delete);
+            Controls.Add(panel_editing);
             Controls.Add(button_edit_element);
             Controls.Add(button_delete_element);
             Controls.Add(panel_F2);

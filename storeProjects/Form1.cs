@@ -1,3 +1,4 @@
+using System.Diagnostics.Eventing.Reader;
 using System.DirectoryServices.ActiveDirectory;
 
 namespace storeProjects
@@ -49,6 +50,8 @@ namespace storeProjects
             this.ActiveControl = null;
             panel_F1.Visible = true;
             panel_F2.Visible = false;
+            button_F2.BackColor = SystemColors.ControlLight;
+            button_F1.BackColor = SystemColors.ButtonShadow;
             update_total_price_c1();
         }
         private void button_F2_Click(object sender, EventArgs e)
@@ -56,6 +59,8 @@ namespace storeProjects
             this.ActiveControl = null;
             panel_F1.Visible = false;
             panel_F2.Visible = true;
+            button_F1.BackColor = SystemColors.ControlLight;
+            button_F2.BackColor = SystemColors.ButtonShadow;
             update_total_price_c2();
         }
         private void add_button_Click(object sender, EventArgs e)
@@ -96,7 +101,7 @@ namespace storeProjects
                     }
                     else
                     {
-                        if (Convert.ToInt32(products[i].barcode) == 0)
+                        if (Convert.ToInt64(products[i].barcode) == 0)
                         {
                             l++;
                         }
@@ -122,7 +127,7 @@ namespace storeProjects
 
                     }
                 }
-                for (int i = 0; i <= l; i++)
+                for (int i = 0; i < l; i++)
                 {
                     string price, name, code, special;
                     price = "";
@@ -372,11 +377,20 @@ namespace storeProjects
                 }
             }
         }
+        public class BorderlessGroupBox : GroupBox
+        {
+            protected override void OnPaint(PaintEventArgs e)
+            {
+                // Call the base class OnPaint to draw the content without the border
+                e.Graphics.Clear(this.BackColor); // Optional: fill background with the control's background color
+                TextRenderer.DrawText(e.Graphics, this.Text, this.Font, new Point(6, 0), this.ForeColor);
+            }
+        }
 
         private void creatGroupbox1(string n, int q, double p, int clasment, int j, int i)
         {
             //creat group box
-            GroupBox groupbox = new GroupBox();
+            GroupBox groupbox = new BorderlessGroupBox();
             groupbox.Text = "";
             groupbox.Size = new Size(390, 40);
             if (j < 12)
@@ -392,7 +406,8 @@ namespace storeProjects
             Label label = new Label();
             label.Text = clasment + ".";
             label.Size = new Size(16, 15);
-            label.Location = new Point(0, 12);
+            label.Location = new Point(2, 17);
+            label.Font = new Font("Arial", 8);
             groupbox.Controls.Add(label);
 
             //creat name product text box
@@ -425,18 +440,21 @@ namespace storeProjects
             //creat delete button
             Button button = new Button();
             button.Text = "X";
-            button.Size = new Size(40, 40);
-            button.Location = new Point(350, 5);
+            button.FlatStyle = FlatStyle.System;
+            button.Size = new Size(40, 38);
+            button.Location = new Point(350, 7);
             button.Click += (sender, e) => { curent_client1[i].quantity = 0; updateBox1(); update_total_price_c1(); this.ActiveControl = null; };
             groupbox.Controls.Add(button);
 
             groupBox_F1.Controls.Add(groupbox);
         }
 
+
+
         private void creatGroupbox2(string n, int q, double p, int clasment, int j, int i)
         {
             //creat group box
-            GroupBox groupbox = new GroupBox();
+            GroupBox groupbox = new BorderlessGroupBox();
             groupbox.Text = "";
             groupbox.Size = new Size(390, 40);
             if (j < 12)
@@ -452,7 +470,8 @@ namespace storeProjects
             Label label = new Label();
             label.Text = clasment + ".";
             label.Size = new Size(16, 15);
-            label.Location = new Point(0, 12);
+            label.Location = new Point(2, 17);
+            label.Font = new Font("Arial", 8);
             groupbox.Controls.Add(label);
 
             //creat name product text box
@@ -485,8 +504,9 @@ namespace storeProjects
             //creat delete button
             Button button = new Button();
             button.Text = "X";
-            button.Size = new Size(40, 40);
-            button.Location = new Point(350, 5);
+            button.FlatStyle = FlatStyle.System;
+            button.Size = new Size(40, 38);
+            button.Location = new Point(350, 7);
             button.Click += (sender, e) => { curent_client2[i].quantity = 0; updateBox2(); update_total_price_c2(); this.ActiveControl = null; };
             groupbox.Controls.Add(button);
 
