@@ -35,6 +35,8 @@ namespace storeProjects
             this.ActiveControl = null;
             panel_add.Visible = false;
             panel_delete.Visible = false;
+            panel_editing.Visible = false;
+            textBox_multi.Visible = false;
         }
 
 
@@ -67,6 +69,7 @@ namespace storeProjects
         {
             panel_add.Visible = true;
             this.ActiveControl = null;
+
         }
 
         private void SaveProducts()
@@ -252,6 +255,9 @@ namespace storeProjects
             {
                 case Keys.Subtract:
                     button_sub.PerformClick();
+                    break;
+                case Keys.Multiply:
+                    button_multi.PerformClick();
                     break;
                 case Keys.Add:
                     button_add.PerformClick();
@@ -546,6 +552,11 @@ namespace storeProjects
                 this.ActiveControl = null;
                 input_barcode.Text = "";
             }
+            else if (input_barcode.Text == "*")
+            {
+                this.ActiveControl = null;
+                input_barcode.Text = "";
+            }
             ReadProducts();
             if (panel_F1.Visible == true)
             {
@@ -621,7 +632,6 @@ namespace storeProjects
                 }
                 this.ActiveControl = null;
             }
-
         }
 
         private void button_sub_Click(object sender, EventArgs e)
@@ -776,8 +786,8 @@ namespace storeProjects
         private void button1_Click(object sender, EventArgs e)
         {
             this.ActiveControl = null;
-            
-            if (textBox_editing_barcode.Text== "")
+
+            if (textBox_editing_barcode.Text == "")
             {
                 error_screen("Enter the bare code", "error");
             }
@@ -797,14 +807,14 @@ namespace storeProjects
                             double tmp_price = products[i].price;
                             String tmp_barcode = products[i].barcode;
                             Boolean tmp_special = products[i].special;
-                            if (textBox_editing_name.Text.Length>1)
+                            if (textBox_editing_name.Text.Length > 1)
                             {
                                 tmp_name = textBox_editing_name.Text;
-                                products[i]= new Products(tmp_name, tmp_price, tmp_barcode, tmp_special);
+                                products[i] = new Products(tmp_name, tmp_price, tmp_barcode, tmp_special);
                                 SaveProducts();
                                 special_panel_filling();
                             }
-                            if (textBox_editing_price.Text.Length>1)
+                            if (textBox_editing_price.Text.Length > 1)
                             {
                                 try
                                 {
@@ -820,14 +830,88 @@ namespace storeProjects
                             }
                         }
                     }
-                    
+
                 }
             }
-            
+
             textBox_editing_barcode.Text = "";
             textBox_editing_name.Text = "";
             textBox_editing_price.Text = "";
             panel_editing.Visible = false;
+        }
+
+        private void textBox_editing_price_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+        //hnaaaaaaaaaaaaaaaaaaa
+        private void button_multi_Click(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+            textBox_multi.Visible = true;
+            textBox_multi.Focus();
+        }
+
+        private void textBox_multi_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox_multi.Text=="0")
+            {
+                this.ActiveControl = null;
+                textBox_multi.Visible = false;
+                textBox_multi.Text = "";
+            }
+            else if (textBox_multi.Text!="")
+            {
+                try
+                {
+                    if (Convert.ToInt32(textBox_multi.Text) > 9)
+                    {
+                        if (panel_F1.Visible == true)
+                        {
+                            try
+                            {
+                                curent_client1[c1 - 1].quantity = Convert.ToInt32(textBox_multi.Text);
+                                updateBox1();
+                                update_total_price_c1();
+                            }
+                            catch
+                            {
+                                //there is a problem
+                            }
+                        }
+                        else
+                        {
+                            try
+                            {
+                                curent_client2[c2 - 1].quantity = Convert.ToInt32(textBox_multi.Text);
+                                updateBox2();
+                                update_total_price_c2();
+                            }
+                            catch
+                            {
+                                //there is a problem
+                            }
+                        }
+                        this.ActiveControl = null;
+                        textBox_multi.Visible = false;
+                        textBox_multi.Text = "";
+                    }
+                }
+                catch
+                {
+                    //there is a problem
+                }
+            }
         }
     }
 }

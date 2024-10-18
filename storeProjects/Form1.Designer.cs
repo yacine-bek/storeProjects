@@ -36,6 +36,7 @@
             panel_F2 = new Panel();
             groupBox_F2 = new BorderlessGroupBox();
             panel_add = new Panel();
+            label11 = new Label();
             cancel_adding = new Button();
             special_check = new CheckBox();
             name_input = new TextBox();
@@ -52,6 +53,15 @@
             price_output = new TextBox();
             panel_special = new Panel();
             groupBox_special = new BorderlessGroupBox();
+            panel_editing = new Panel();
+            label10 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            textBox_editing_price = new TextBox();
+            textBox_editing_name = new TextBox();
+            label6 = new Label();
+            textBox_editing_barcode = new TextBox();
+            button_editing_confirm = new Button();
             button_sub = new Button();
             button_add = new Button();
             label4 = new Label();
@@ -61,20 +71,15 @@
             label5 = new Label();
             textBox_barcode_delete = new TextBox();
             button_confirm_delete = new Button();
-            panel_editing = new Panel();
-            label8 = new Label();
-            label7 = new Label();
-            textBox_editing_price = new TextBox();
-            textBox_editing_name = new TextBox();
-            label6 = new Label();
-            textBox_editing_barcode = new TextBox();
-            button_editing_confirm = new Button();
+            button_multi = new Button();
+            textBox_multi = new TextBox();
+            label9 = new Label();
             panel_F1.SuspendLayout();
             panel_F2.SuspendLayout();
             panel_add.SuspendLayout();
             panel_special.SuspendLayout();
-            panel_delete.SuspendLayout();
             panel_editing.SuspendLayout();
+            panel_delete.SuspendLayout();
             SuspendLayout();
             // 
             // button_F2
@@ -139,7 +144,8 @@
             // 
             // panel_add
             // 
-            panel_add.BackColor = SystemColors.ButtonShadow;
+            panel_add.BackColor = Color.Beige;
+            panel_add.Controls.Add(label11);
             panel_add.Controls.Add(cancel_adding);
             panel_add.Controls.Add(special_check);
             panel_add.Controls.Add(name_input);
@@ -149,16 +155,26 @@
             panel_add.Controls.Add(barcode_input);
             panel_add.Controls.Add(label1);
             panel_add.Controls.Add(button_done);
-            panel_add.Location = new Point(954, 15);
+            panel_add.Location = new Point(443, 219);
             panel_add.Name = "panel_add";
-            panel_add.Size = new Size(250, 200);
+            panel_add.Size = new Size(500, 350);
             panel_add.TabIndex = 14;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Unispace", 25F);
+            label11.Location = new Point(12, 12);
+            label11.Name = "label11";
+            label11.Size = new Size(312, 41);
+            label11.TabIndex = 19;
+            label11.Text = "ADD Product : ";
             // 
             // cancel_adding
             // 
-            cancel_adding.Location = new Point(147, 162);
+            cancel_adding.Location = new Point(250, 285);
             cancel_adding.Name = "cancel_adding";
-            cancel_adding.Size = new Size(100, 35);
+            cancel_adding.Size = new Size(150, 50);
             cancel_adding.TabIndex = 17;
             cancel_adding.Text = "Cancel";
             cancel_adding.UseVisualStyleBackColor = true;
@@ -167,9 +183,10 @@
             // special_check
             // 
             special_check.AutoSize = true;
-            special_check.Location = new Point(3, 137);
+            special_check.Font = new Font("Segoe UI", 15F);
+            special_check.Location = new Point(301, 250);
             special_check.Name = "special_check";
-            special_check.Size = new Size(67, 19);
+            special_check.Size = new Size(99, 32);
             special_check.TabIndex = 7;
             special_check.Text = "special?";
             special_check.UseVisualStyleBackColor = true;
@@ -177,60 +194,63 @@
             // 
             // name_input
             // 
-            name_input.Font = new Font("Segoe UI", 10F);
-            name_input.Location = new Point(3, 64);
+            name_input.Font = new Font("Segoe UI", 15F);
+            name_input.Location = new Point(100, 151);
             name_input.Name = "name_input";
-            name_input.Size = new Size(244, 25);
+            name_input.Size = new Size(300, 34);
             name_input.TabIndex = 6;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(3, 46);
+            label3.Font = new Font("Segoe UI", 15F);
+            label3.Location = new Point(126, 120);
             label3.Name = "label3";
-            label3.Size = new Size(156, 15);
+            label3.Size = new Size(255, 28);
             label3.TabIndex = 5;
             label3.Text = "Enter The name of Products:";
             // 
             // price_input
             // 
-            price_input.Font = new Font("Segoe UI", 10F);
-            price_input.Location = new Point(3, 110);
+            price_input.Font = new Font("Segoe UI", 15F);
+            price_input.Location = new Point(100, 215);
             price_input.Name = "price_input";
-            price_input.Size = new Size(244, 25);
+            price_input.Size = new Size(300, 34);
             price_input.TabIndex = 4;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(3, 92);
+            label2.Font = new Font("Segoe UI", 15F);
+            label2.Location = new Point(180, 184);
             label2.Name = "label2";
-            label2.Size = new Size(88, 15);
+            label2.Size = new Size(144, 28);
             label2.TabIndex = 3;
             label2.Text = "Enter The Price:";
             // 
             // barcode_input
             // 
-            barcode_input.Font = new Font("Segoe UI", 10F);
-            barcode_input.Location = new Point(3, 18);
+            barcode_input.Font = new Font("Segoe UI", 15F);
+            barcode_input.Location = new Point(100, 84);
             barcode_input.Name = "barcode_input";
-            barcode_input.Size = new Size(244, 25);
+            barcode_input.Size = new Size(300, 34);
             barcode_input.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(3, 0);
+            label1.Font = new Font("Segoe UI", 15F);
+            label1.Location = new Point(180, 53);
             label1.Name = "label1";
-            label1.Size = new Size(88, 15);
+            label1.Size = new Size(145, 28);
             label1.TabIndex = 1;
             label1.Text = "Enter Bar Code:";
             // 
             // button_done
             // 
-            button_done.Location = new Point(3, 162);
+            button_done.Location = new Point(100, 285);
             button_done.Name = "button_done";
-            button_done.Size = new Size(100, 35);
+            button_done.Size = new Size(150, 50);
             button_done.TabIndex = 0;
             button_done.Text = "Done";
             button_done.UseVisualStyleBackColor = true;
@@ -300,6 +320,102 @@
             groupBox_special.TabIndex = 0;
             groupBox_special.TabStop = false;
             // 
+            // panel_editing
+            // 
+            panel_editing.BackColor = Color.Cornsilk;
+            panel_editing.Controls.Add(label10);
+            panel_editing.Controls.Add(label8);
+            panel_editing.Controls.Add(label7);
+            panel_editing.Controls.Add(textBox_editing_price);
+            panel_editing.Controls.Add(textBox_editing_name);
+            panel_editing.Controls.Add(label6);
+            panel_editing.Controls.Add(textBox_editing_barcode);
+            panel_editing.Controls.Add(button_editing_confirm);
+            panel_editing.Location = new Point(443, 219);
+            panel_editing.Name = "panel_editing";
+            panel_editing.Size = new Size(500, 350);
+            panel_editing.TabIndex = 27;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Unispace", 25F);
+            label10.Location = new Point(38, 11);
+            label10.Name = "label10";
+            label10.Size = new Size(438, 41);
+            label10.TabIndex = 8;
+            label10.Text = "Edit Product Data : ";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 15F);
+            label8.Location = new Point(137, 220);
+            label8.Name = "label8";
+            label8.Size = new Size(229, 28);
+            label8.TabIndex = 6;
+            label8.Text = "New Price of the product";
+            label8.Click += label8_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 15F);
+            label7.Location = new Point(144, 152);
+            label7.Name = "label7";
+            label7.Size = new Size(205, 28);
+            label7.TabIndex = 5;
+            label7.Text = "New Name of Product";
+            label7.Click += label7_Click;
+            // 
+            // textBox_editing_price
+            // 
+            textBox_editing_price.Font = new Font("Segoe UI", 15F);
+            textBox_editing_price.Location = new Point(104, 255);
+            textBox_editing_price.Name = "textBox_editing_price";
+            textBox_editing_price.Size = new Size(300, 34);
+            textBox_editing_price.TabIndex = 4;
+            textBox_editing_price.TextChanged += textBox_editing_price_TextChanged;
+            // 
+            // textBox_editing_name
+            // 
+            textBox_editing_name.Font = new Font("Segoe UI", 15F);
+            textBox_editing_name.Location = new Point(104, 183);
+            textBox_editing_name.Name = "textBox_editing_name";
+            textBox_editing_name.Size = new Size(300, 34);
+            textBox_editing_name.TabIndex = 3;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 15F);
+            label6.Location = new Point(137, 55);
+            label6.Name = "label6";
+            label6.Size = new Size(231, 56);
+            label6.TabIndex = 2;
+            label6.Text = "Enter the code of \r\nthe element u wanna Edit";
+            label6.TextAlign = ContentAlignment.BottomCenter;
+            label6.Click += label6_Click;
+            // 
+            // textBox_editing_barcode
+            // 
+            textBox_editing_barcode.Font = new Font("Segoe UI", 15F);
+            textBox_editing_barcode.Location = new Point(104, 114);
+            textBox_editing_barcode.Name = "textBox_editing_barcode";
+            textBox_editing_barcode.Size = new Size(300, 34);
+            textBox_editing_barcode.TabIndex = 1;
+            // 
+            // button_editing_confirm
+            // 
+            button_editing_confirm.Font = new Font("Segoe UI", 14F);
+            button_editing_confirm.Location = new Point(179, 295);
+            button_editing_confirm.Name = "button_editing_confirm";
+            button_editing_confirm.Size = new Size(150, 50);
+            button_editing_confirm.TabIndex = 0;
+            button_editing_confirm.Text = "Confirm";
+            button_editing_confirm.UseVisualStyleBackColor = true;
+            button_editing_confirm.Click += button1_Click;
+            // 
             // button_sub
             // 
             button_sub.Font = new Font("Segoe UI", 25F);
@@ -334,7 +450,7 @@
             // 
             // button_delete_element
             // 
-            button_delete_element.Location = new Point(1283, 475);
+            button_delete_element.Location = new Point(1283, 221);
             button_delete_element.Name = "button_delete_element";
             button_delete_element.Size = new Size(75, 50);
             button_delete_element.TabIndex = 24;
@@ -344,7 +460,7 @@
             // 
             // button_edit_element
             // 
-            button_edit_element.Location = new Point(1208, 475);
+            button_edit_element.Location = new Point(1208, 221);
             button_edit_element.Name = "button_edit_element";
             button_edit_element.Size = new Size(75, 50);
             button_edit_element.TabIndex = 25;
@@ -358,7 +474,7 @@
             panel_delete.Controls.Add(label5);
             panel_delete.Controls.Add(textBox_barcode_delete);
             panel_delete.Controls.Add(button_confirm_delete);
-            panel_delete.Location = new Point(1157, 531);
+            panel_delete.Location = new Point(1158, 270);
             panel_delete.Name = "panel_delete";
             panel_delete.Size = new Size(200, 128);
             panel_delete.TabIndex = 26;
@@ -390,92 +506,52 @@
             button_confirm_delete.UseVisualStyleBackColor = true;
             button_confirm_delete.Click += button_confirm_delete_Click;
             // 
-            // panel_editing
+            // button_multi
             // 
-            panel_editing.BackColor = SystemColors.ButtonShadow;
-            panel_editing.Controls.Add(label8);
-            panel_editing.Controls.Add(label7);
-            panel_editing.Controls.Add(textBox_editing_price);
-            panel_editing.Controls.Add(textBox_editing_name);
-            panel_editing.Controls.Add(label6);
-            panel_editing.Controls.Add(textBox_editing_barcode);
-            panel_editing.Controls.Add(button_editing_confirm);
-            panel_editing.Location = new Point(1157, 278);
-            panel_editing.Name = "panel_editing";
-            panel_editing.Size = new Size(200, 200);
-            panel_editing.TabIndex = 27;
+            button_multi.FlatStyle = FlatStyle.System;
+            button_multi.Font = new Font("Segoe UI", 25F);
+            button_multi.Location = new Point(1205, 417);
+            button_multi.Name = "button_multi";
+            button_multi.Size = new Size(150, 50);
+            button_multi.TabIndex = 28;
+            button_multi.Text = "*";
+            button_multi.UseVisualStyleBackColor = true;
+            button_multi.Click += button_multi_Click;
             // 
-            // label8
+            // textBox_multi
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(3, 113);
-            label8.Name = "label8";
-            label8.Size = new Size(139, 15);
-            label8.TabIndex = 6;
-            label8.Text = "New Price of the product";
-            label8.Click += label8_Click;
+            textBox_multi.Font = new Font("Segoe UI", 20F);
+            textBox_multi.Location = new Point(1205, 469);
+            textBox_multi.Name = "textBox_multi";
+            textBox_multi.Size = new Size(150, 43);
+            textBox_multi.TabIndex = 29;
+            textBox_multi.TextAlign = HorizontalAlignment.Center;
+            textBox_multi.Visible = false;
+            textBox_multi.TextChanged += textBox_multi_TextChanged;
             // 
-            // label7
+            // label9
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(3, 69);
-            label7.Name = "label7";
-            label7.Size = new Size(125, 15);
-            label7.TabIndex = 5;
-            label7.Text = "New Name of Product";
-            // 
-            // textBox_editing_price
-            // 
-            textBox_editing_price.Location = new Point(3, 131);
-            textBox_editing_price.Name = "textBox_editing_price";
-            textBox_editing_price.Size = new Size(194, 23);
-            textBox_editing_price.TabIndex = 4;
-            // 
-            // textBox_editing_name
-            // 
-            textBox_editing_name.Location = new Point(1, 87);
-            textBox_editing_name.Name = "textBox_editing_name";
-            textBox_editing_name.Size = new Size(194, 23);
-            textBox_editing_name.TabIndex = 3;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(23, 10);
-            label6.Name = "label6";
-            label6.Size = new Size(141, 30);
-            label6.TabIndex = 2;
-            label6.Text = "Enter the code of \r\nthe element u wanna Edit";
-            label6.TextAlign = ContentAlignment.BottomCenter;
-            // 
-            // textBox_editing_barcode
-            // 
-            textBox_editing_barcode.Location = new Point(3, 43);
-            textBox_editing_barcode.Name = "textBox_editing_barcode";
-            textBox_editing_barcode.Size = new Size(194, 23);
-            textBox_editing_barcode.TabIndex = 1;
-            // 
-            // button_editing_confirm
-            // 
-            button_editing_confirm.Location = new Point(51, 165);
-            button_editing_confirm.Name = "button_editing_confirm";
-            button_editing_confirm.Size = new Size(100, 30);
-            button_editing_confirm.TabIndex = 0;
-            button_editing_confirm.Text = "Confirm";
-            button_editing_confirm.UseVisualStyleBackColor = true;
-            button_editing_confirm.Click += button1_Click;
+            label9.AutoSize = true;
+            label9.Location = new Point(1205, 403);
+            label9.Name = "label9";
+            label9.Size = new Size(59, 15);
+            label9.TabIndex = 30;
+            label9.Text = "+10 only :";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1370, 749);
-            Controls.Add(panel_delete);
+            Controls.Add(label9);
+            Controls.Add(textBox_multi);
+            Controls.Add(button_multi);
+            Controls.Add(panel_add);
             Controls.Add(panel_editing);
+            Controls.Add(panel_delete);
             Controls.Add(button_edit_element);
             Controls.Add(button_delete_element);
             Controls.Add(panel_F2);
-            Controls.Add(panel_add);
             Controls.Add(button_add);
             Controls.Add(button_sub);
             Controls.Add(panel_special);
@@ -494,10 +570,10 @@
             panel_add.ResumeLayout(false);
             panel_add.PerformLayout();
             panel_special.ResumeLayout(false);
-            panel_delete.ResumeLayout(false);
-            panel_delete.PerformLayout();
             panel_editing.ResumeLayout(false);
             panel_editing.PerformLayout();
+            panel_delete.ResumeLayout(false);
+            panel_delete.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -507,7 +583,6 @@
         private Button button_F2;
         private Button button_F1;
         private Panel panel_F1;
-        private GroupBox groupBox_F1;
         private Button add_button;
         private TextBox input_barcode;
         private Button button_next;
@@ -524,11 +599,9 @@
         private ContextMenuStrip contextMenuStrip1;
         private TextBox price_output;
         private Panel panel_special;
-        private GroupBox groupBox_special;
         private Button button_sub;
         private Button button_add;
         private Panel panel_F2;
-        private GroupBox groupBox_F2;
         private Label label4;
         private Button button_delete_element;
         private Button button_edit_element;
@@ -544,5 +617,13 @@
         private Label label6;
         private TextBox textBox_editing_barcode;
         private Button button_editing_confirm;
+        private BorderlessGroupBox groupBox_F1;
+        private BorderlessGroupBox groupBox_special;
+        private BorderlessGroupBox groupBox_F2;
+        private Label label11;
+        private Label label10;
+        private Button button_multi;
+        private TextBox textBox_multi;
+        private Label label9;
     }
 }
