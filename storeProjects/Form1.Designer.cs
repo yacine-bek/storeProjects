@@ -108,6 +108,7 @@
             // 
             // panel_F1
             // 
+            panel_F1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             panel_F1.BackColor = SystemColors.ButtonShadow;
             panel_F1.Controls.Add(groupBox_F1);
             panel_F1.Location = new Point(15, 47);
@@ -126,6 +127,7 @@
             // 
             // panel_F2
             // 
+            panel_F2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             panel_F2.BackColor = SystemColors.ButtonShadow;
             panel_F2.Controls.Add(groupBox_F2);
             panel_F2.Location = new Point(15, 47);
@@ -144,6 +146,7 @@
             // 
             // panel_add
             // 
+            panel_add.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel_add.BackColor = Color.Beige;
             panel_add.Controls.Add(label11);
             panel_add.Controls.Add(cancel_adding);
@@ -162,6 +165,7 @@
             // 
             // label11
             // 
+            label11.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label11.AutoSize = true;
             label11.Font = new Font("Unispace", 25F);
             label11.Location = new Point(12, 12);
@@ -172,6 +176,7 @@
             // 
             // cancel_adding
             // 
+            cancel_adding.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cancel_adding.Location = new Point(250, 285);
             cancel_adding.Name = "cancel_adding";
             cancel_adding.Size = new Size(150, 50);
@@ -182,6 +187,7 @@
             // 
             // special_check
             // 
+            special_check.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             special_check.AutoSize = true;
             special_check.Font = new Font("Segoe UI", 15F);
             special_check.Location = new Point(301, 250);
@@ -194,6 +200,7 @@
             // 
             // name_input
             // 
+            name_input.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             name_input.Font = new Font("Segoe UI", 15F);
             name_input.Location = new Point(100, 151);
             name_input.Name = "name_input";
@@ -202,6 +209,7 @@
             // 
             // label3
             // 
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 15F);
             label3.Location = new Point(126, 120);
@@ -212,6 +220,7 @@
             // 
             // price_input
             // 
+            price_input.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             price_input.Font = new Font("Segoe UI", 15F);
             price_input.Location = new Point(100, 215);
             price_input.Name = "price_input";
@@ -220,6 +229,7 @@
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 15F);
             label2.Location = new Point(180, 184);
@@ -230,6 +240,7 @@
             // 
             // barcode_input
             // 
+            barcode_input.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             barcode_input.Font = new Font("Segoe UI", 15F);
             barcode_input.Location = new Point(100, 84);
             barcode_input.Name = "barcode_input";
@@ -238,6 +249,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15F);
             label1.Location = new Point(180, 53);
@@ -248,6 +260,7 @@
             // 
             // button_done
             // 
+            button_done.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             button_done.Location = new Point(100, 285);
             button_done.Name = "button_done";
             button_done.Size = new Size(150, 50);
@@ -258,6 +271,7 @@
             // 
             // add_button
             // 
+            add_button.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             add_button.FlatStyle = FlatStyle.Flat;
             add_button.Location = new Point(1208, 15);
             add_button.Name = "add_button";
@@ -269,6 +283,7 @@
             // 
             // input_barcode
             // 
+            input_barcode.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             input_barcode.Font = new Font("Segoe UI", 20F);
             input_barcode.Location = new Point(1208, 71);
             input_barcode.Name = "input_barcode";
@@ -278,6 +293,7 @@
             // 
             // button_next
             // 
+            button_next.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button_next.FlatStyle = FlatStyle.Flat;
             button_next.Location = new Point(1208, 687);
             button_next.Name = "button_next";
@@ -294,6 +310,7 @@
             // 
             // price_output
             // 
+            price_output.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             price_output.Font = new Font("Segoe UI", 50F);
             price_output.Location = new Point(15, 589);
             price_output.Name = "price_output";
@@ -305,6 +322,7 @@
             // 
             // panel_special
             // 
+            panel_special.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             panel_special.BackColor = SystemColors.ButtonShadow;
             panel_special.Controls.Add(groupBox_special);
             panel_special.Location = new Point(851, 47);
@@ -322,6 +340,7 @@
             // 
             // panel_editing
             // 
+            panel_editing.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel_editing.BackColor = Color.Cornsilk;
             panel_editing.Controls.Add(label10);
             panel_editing.Controls.Add(label8);
@@ -418,6 +437,7 @@
             // 
             // button_sub
             // 
+            button_sub.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button_sub.Font = new Font("Segoe UI", 25F);
             button_sub.Location = new Point(1208, 600);
             button_sub.Name = "button_sub";
@@ -429,6 +449,7 @@
             // 
             // button_add
             // 
+            button_add.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button_add.FlatStyle = FlatStyle.System;
             button_add.Font = new Font("Segoe UI", 25F);
             button_add.Location = new Point(1208, 550);
@@ -450,7 +471,8 @@
             // 
             // button_delete_element
             // 
-            button_delete_element.Location = new Point(1283, 221);
+            button_delete_element.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button_delete_element.Location = new Point(1283, 134);
             button_delete_element.Name = "button_delete_element";
             button_delete_element.Size = new Size(75, 50);
             button_delete_element.TabIndex = 24;
@@ -460,7 +482,8 @@
             // 
             // button_edit_element
             // 
-            button_edit_element.Location = new Point(1208, 221);
+            button_edit_element.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button_edit_element.Location = new Point(1208, 134);
             button_edit_element.Name = "button_edit_element";
             button_edit_element.Size = new Size(75, 50);
             button_edit_element.TabIndex = 25;
@@ -470,11 +493,12 @@
             // 
             // panel_delete
             // 
+            panel_delete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel_delete.BackColor = SystemColors.ButtonShadow;
             panel_delete.Controls.Add(label5);
             panel_delete.Controls.Add(textBox_barcode_delete);
             panel_delete.Controls.Add(button_confirm_delete);
-            panel_delete.Location = new Point(1158, 270);
+            panel_delete.Location = new Point(1158, 183);
             panel_delete.Name = "panel_delete";
             panel_delete.Size = new Size(200, 128);
             panel_delete.TabIndex = 26;
@@ -508,6 +532,7 @@
             // 
             // button_multi
             // 
+            button_multi.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button_multi.FlatStyle = FlatStyle.System;
             button_multi.Font = new Font("Segoe UI", 25F);
             button_multi.Location = new Point(1205, 417);
@@ -520,6 +545,7 @@
             // 
             // textBox_multi
             // 
+            textBox_multi.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             textBox_multi.Font = new Font("Segoe UI", 20F);
             textBox_multi.Location = new Point(1205, 469);
             textBox_multi.Name = "textBox_multi";
@@ -531,6 +557,7 @@
             // 
             // label9
             // 
+            label9.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             label9.AutoSize = true;
             label9.Location = new Point(1205, 403);
             label9.Name = "label9";

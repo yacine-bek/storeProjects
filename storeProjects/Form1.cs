@@ -67,6 +67,9 @@ namespace storeProjects
         }
         private void add_button_Click(object sender, EventArgs e)
         {
+            panel_editing.Visible = false;
+            panel_delete.Visible = false;
+            textBox_multi.Visible = false;
             panel_add.Visible = true;
             this.ActiveControl = null;
 
@@ -746,6 +749,9 @@ namespace storeProjects
 
         private void button_delete_element_Click(object sender, EventArgs e)
         {
+            panel_editing.Visible = false;
+            textBox_multi.Visible = false;
+            panel_add.Visible = false;
             this.ActiveControl = null;
             panel_delete.Visible = true;
         }
@@ -774,6 +780,9 @@ namespace storeProjects
 
         private void button_edit_element_Click(object sender, EventArgs e)
         {
+            panel_delete.Visible = false;
+            textBox_multi.Visible = false;
+            panel_add.Visible = false;
             panel_editing.Visible = true;
             this.ActiveControl = null;
         }
@@ -854,9 +863,12 @@ namespace storeProjects
         {
 
         }
-        //hnaaaaaaaaaaaaaaaaaaa
+
         private void button_multi_Click(object sender, EventArgs e)
         {
+            panel_editing.Visible = false;
+            panel_delete.Visible = false;
+            panel_add.Visible = false;
             this.ActiveControl = null;
             textBox_multi.Visible = true;
             textBox_multi.Focus();
