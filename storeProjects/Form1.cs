@@ -1,10 +1,13 @@
 using System.Diagnostics.Eventing.Reader;
 using System.DirectoryServices.ActiveDirectory;
+using System.Runtime.CompilerServices;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace storeProjects
 {
     public partial class Form1 : Form
     {
+
 
         public Form1()
         {
@@ -72,7 +75,7 @@ namespace storeProjects
             textBox_multi.Visible = false;
             panel_add.Visible = true;
             this.ActiveControl = null;
-
+            barcode_input.Focus();
         }
 
         private void SaveProducts()
@@ -256,6 +259,12 @@ namespace storeProjects
         {
             switch (e.KeyCode)
             {
+                case Keys.Enter:
+                    if (panel_add.Visible == false && panel_delete.Visible == false && panel_editing.Visible == false)
+                    {
+                        button_next.PerformClick();
+                    }
+                    break;
                 case Keys.Subtract:
                     button_sub.PerformClick();
                     break;
@@ -265,9 +274,6 @@ namespace storeProjects
                 case Keys.Add:
                     button_add.PerformClick();
                     break;
-                case Keys.Escape:
-                    input_barcode.Focus();
-                    break;
                 case Keys.F1:
                     button_F1.PerformClick();
                     break;
@@ -275,10 +281,10 @@ namespace storeProjects
                     button_F2.PerformClick();
                     break;
                 case Keys.Space:
-                    input_barcode.Focus();
-                    break;
-                case Keys.Enter:
-                    button_next.PerformClick();
+                    if (panel_add.Visible == false)
+                    {
+                        input_barcode.Focus();
+                    }
                     break;
             }
         }
@@ -323,9 +329,9 @@ namespace storeProjects
                 this.quantity = quantity;
             }
         }
-        private Products[] products = new Products[100];
-        private Clent[] curent_client1 = new Clent[100];
-        private Clent[] curent_client2 = new Clent[100];
+        private Products[] products = new Products[500];
+        private Clent[] curent_client1 = new Clent[50];
+        private Clent[] curent_client2 = new Clent[50];
         private int c1 = 0;
         private int c2 = 0;
         private int nbr = 0;
@@ -543,33 +549,18 @@ namespace storeProjects
             price_output.Text = total.ToString() + " DA";
         }
 
-        private void input_barcode_TextChanged_1(object sender, EventArgs e)
+
+        private void product_adding(String code)
         {
-            if (input_barcode.Text == "+")
-            {
-                this.ActiveControl = null;
-                input_barcode.Text = "";
-            }
-            else if (input_barcode.Text == "-")
-            {
-                this.ActiveControl = null;
-                input_barcode.Text = "";
-            }
-            else if (input_barcode.Text == "*")
-            {
-                this.ActiveControl = null;
-                input_barcode.Text = "";
-            }
-            ReadProducts();
             if (panel_F1.Visible == true)
             {
-                if (check_product_existence(input_barcode.Text) == true)
+                if (check_product_existence(code) == true)
                 {
-                    if (check_curent_client_1(input_barcode.Text) == false)
+                    if (check_curent_client_1(code) == false)
                     {
                         for (int j = 0; j < producte_lenght(); j++)
                         {
-                            if (input_barcode.Text == products[j].barcode)
+                            if (code == products[j].barcode)
                             {
                                 curent_client1[c1] = new Clent(products[j].name, Convert.ToDouble(products[j].price), products[j].barcode, products[j].special, 1);
 
@@ -584,13 +575,13 @@ namespace storeProjects
             }
             else
             {
-                if (check_product_existence(input_barcode.Text) == true)
+                if (check_product_existence(code) == true)
                 {
-                    if (check_curent_client_2(input_barcode.Text) == false)
+                    if (check_curent_client_2(code) == false)
                     {
                         for (int j = 0; j < producte_lenght(); j++)
                         {
-                            if (input_barcode.Text == products[j].barcode)
+                            if (code == products[j].barcode)
                             {
                                 curent_client2[c2] = new Clent(products[j].name, Convert.ToDouble(products[j].price), products[j].barcode, products[j].special, 1);
 
@@ -602,6 +593,45 @@ namespace storeProjects
                     updateBox2();
                     update_total_price_c2();
                 }
+            }
+
+        }
+
+
+        private void input_barcode_TextChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (input_barcode.Text == "+")
+                {
+                    this.ActiveControl = null;
+                    input_barcode.Text = "";
+                }
+                else if (input_barcode.Text == "-")
+                {
+                    this.ActiveControl = null;
+                    input_barcode.Text = "";
+                }
+                else if (input_barcode.Text == "*")
+                {
+                    this.ActiveControl = null;
+                    input_barcode.Text = "";
+                }
+                else if (Convert.ToInt64(input_barcode.Text) > 100 && check_product_existence(input_barcode.Text) == false)
+                {
+                    panel_add.Visible = true;
+                    name_input.Focus();
+                    barcode_input.Text = input_barcode.Text;
+                    input_barcode.Text = "";
+                }
+                ReadProducts();
+                product_adding(input_barcode.Text);
+
+            }
+            catch
+            {
+                //there is a problem
             }
         }
 
@@ -685,38 +715,51 @@ namespace storeProjects
 
         private void special_panel_filling()
         {
+            groupBox_special.Controls.Clear();
             int k = 0;
             for (int i = 0; i < producte_lenght(); i++)
             {
-                if (products[i].special == true)
+                if (products[i]!=null)
                 {
-                    TextBox special_code = new TextBox();
-                    special_code.Text = products[i].barcode + ".";
-                    special_code.Size = new Size(40, 40);
-                    special_code.Font = new Font("Arial", 17);
-                    special_code.Location = new Point(0, 35 * k);
-                    special_code.TextAlign = HorizontalAlignment.Center;
-                    special_code.ReadOnly = true;
+                    if (products[i].special == true && products[i].barcode != "0")
+                    {
+                        TextBox special_code = new TextBox();
+                        special_code.Text = products[i].barcode + ".";
+                        special_code.Size = new Size(40, 40);
+                        special_code.Font = new Font("Arial", 17);
+                        special_code.Location = new Point(0, 35 * k);
+                        special_code.TextAlign = HorizontalAlignment.Center;
+                        special_code.ReadOnly = true;
 
-                    TextBox special_name = new TextBox();
-                    special_name.Text = products[i].name;
-                    special_name.Size = new Size(110, 40);
-                    special_name.Font = new Font("Arial", 17);
-                    special_name.Location = new Point(40, 35 * k);
-                    special_name.ReadOnly = true;
+                        TextBox special_name = new TextBox();
+                        special_name.Text = products[i].name;
+                        special_name.Size = new Size(90, 40);
+                        special_name.Font = new Font("Arial", 17);
+                        special_name.Location = new Point(40, 35 * k);
+                        special_name.ReadOnly = true;
 
-                    TextBox special_price = new TextBox();
-                    special_price.Text = products[i].price + " DA";
-                    special_price.Size = new Size(120, 40);
-                    special_price.Font = new Font("Arial", 17);
-                    special_price.Location = new Point(150, 35 * k);
-                    special_price.ReadOnly = true;
+                        TextBox special_price = new TextBox();
+                        special_price.Text = products[i].price + " DA";
+                        special_price.Size = new Size(100, 40);
+                        special_price.Font = new Font("Arial", 17);
+                        special_price.Location = new Point(130, 35 * k);
+                        special_price.ReadOnly = true;
 
-                    groupBox_special.Controls.Add(special_price);
-                    groupBox_special.Controls.Add(special_code);
-                    groupBox_special.Controls.Add(special_name);
-                    k++;
+                        Button button = new Button();
+                        button.Text = "Add";
+                        button.FlatStyle = FlatStyle.System;
+                        button.Size = new Size(50, 40);
+                        button.Location = new Point(230, 35 * k);
+                        button.Click += (sender, e) => { product_adding(products[i].barcode); this.ActiveControl = null; };
+
+                        groupBox_special.Controls.Add(button);
+                        groupBox_special.Controls.Add(special_price);
+                        groupBox_special.Controls.Add(special_code);
+                        groupBox_special.Controls.Add(special_name);
+                        k++;
+                    }
                 }
+                
             }
         }
 
@@ -754,6 +797,8 @@ namespace storeProjects
             panel_add.Visible = false;
             this.ActiveControl = null;
             panel_delete.Visible = true;
+            textBox_barcode_delete.Focus();
+
         }
 
         private void button_confirm_delete_Click(object sender, EventArgs e)
@@ -776,6 +821,7 @@ namespace storeProjects
             }
             textBox_barcode_delete.Text = "";
             panel_delete.Visible = false;
+            special_panel_filling();
         }
 
         private void button_edit_element_Click(object sender, EventArgs e)
@@ -785,6 +831,7 @@ namespace storeProjects
             panel_add.Visible = false;
             panel_editing.Visible = true;
             this.ActiveControl = null;
+            textBox_editing_barcode.Focus();
         }
 
         private void label8_Click(object sender, EventArgs e)
@@ -876,13 +923,13 @@ namespace storeProjects
 
         private void textBox_multi_TextChanged(object sender, EventArgs e)
         {
-            if (textBox_multi.Text=="0")
+            if (textBox_multi.Text == "0")
             {
                 this.ActiveControl = null;
                 textBox_multi.Visible = false;
                 textBox_multi.Text = "";
             }
-            else if (textBox_multi.Text!="")
+            else if (textBox_multi.Text != "")
             {
                 try
                 {
@@ -923,6 +970,119 @@ namespace storeProjects
                 {
                     //there is a problem
                 }
+            }
+        }
+
+        private void barcode_input_TextChanged(object sender, EventArgs e)
+        {
+        }
+        private void name_input_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Prevent the beep sound
+                price_input.Focus(); // Change focus to the second TextBox
+            }
+        }
+        private void barcode_input_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                name_input.Focus();
+            }
+        }
+        private void name_input_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void price_input_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                button_done.PerformClick();
+            }
+            else if (e.KeyCode == Keys.Space)
+            {
+                special_check.Checked = !special_check.Checked;
+                price_input.Focus();
+            }
+        }
+
+        private void price_input_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void special_check_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                special_check.Checked = !special_check.Checked;
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                button_done.PerformClick();
+            }
+        }
+
+        private void input_barcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Add)
+            {
+                button_add.PerformClick();
+                input_barcode.Text = "";
+            }
+            else if (e.KeyCode == Keys.Subtract)
+            {
+                button_sub.PerformClick();
+                input_barcode.Text = "";
+            }
+            else if (e.KeyCode == Keys.Multiply)
+            {
+                button_multi.PerformClick();
+                input_barcode.Text = "";
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (panel_add.Visible == false && panel_delete.Visible == false && panel_editing.Visible == false)
+                {
+                    e.SuppressKeyPress = true;
+                    button_next.PerformClick();
+                }
+            }
+        }
+
+        private void textBox_editing_barcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textBox_editing_name.Focus();
+            }
+        }
+        private void textBox_editing_name_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textBox_editing_price.Focus();
+            }
+        }
+        private void textBox_editing_price_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_Click(sender, e);
+            }
+        }
+
+        private void textBox_barcode_delete_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode==Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                button_confirm_delete.PerformClick();
             }
         }
     }

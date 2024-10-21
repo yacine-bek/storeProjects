@@ -197,6 +197,7 @@
             special_check.Text = "special?";
             special_check.UseVisualStyleBackColor = true;
             special_check.CheckedChanged += special_check_CheckedChanged;
+            special_check.KeyDown += special_check_KeyDown;
             // 
             // name_input
             // 
@@ -206,6 +207,8 @@
             name_input.Name = "name_input";
             name_input.Size = new Size(300, 34);
             name_input.TabIndex = 6;
+            name_input.TextChanged += name_input_TextChanged;
+            name_input.KeyDown += name_input_KeyDown;
             // 
             // label3
             // 
@@ -226,6 +229,8 @@
             price_input.Name = "price_input";
             price_input.Size = new Size(300, 34);
             price_input.TabIndex = 4;
+            price_input.TextChanged += price_input_TextChanged;
+            price_input.KeyDown += price_input_KeyDown;
             // 
             // label2
             // 
@@ -246,6 +251,8 @@
             barcode_input.Name = "barcode_input";
             barcode_input.Size = new Size(300, 34);
             barcode_input.TabIndex = 2;
+            barcode_input.TextChanged += barcode_input_TextChanged;
+            barcode_input.KeyDown += barcode_input_KeyDown;
             // 
             // label1
             // 
@@ -290,6 +297,7 @@
             input_barcode.Size = new Size(150, 43);
             input_barcode.TabIndex = 12;
             input_barcode.TextChanged += input_barcode_TextChanged_1;
+            input_barcode.KeyDown += input_barcode_KeyDown;
             // 
             // button_next
             // 
@@ -395,6 +403,7 @@
             textBox_editing_price.Size = new Size(300, 34);
             textBox_editing_price.TabIndex = 4;
             textBox_editing_price.TextChanged += textBox_editing_price_TextChanged;
+            textBox_editing_price.KeyDown += textBox_editing_price_KeyDown;
             // 
             // textBox_editing_name
             // 
@@ -403,6 +412,7 @@
             textBox_editing_name.Name = "textBox_editing_name";
             textBox_editing_name.Size = new Size(300, 34);
             textBox_editing_name.TabIndex = 3;
+            textBox_editing_name.KeyDown += textBox_editing_name_KeyDown;
             // 
             // label6
             // 
@@ -423,6 +433,7 @@
             textBox_editing_barcode.Name = "textBox_editing_barcode";
             textBox_editing_barcode.Size = new Size(300, 34);
             textBox_editing_barcode.TabIndex = 1;
+            textBox_editing_barcode.KeyDown += textBox_editing_barcode_KeyDown;
             // 
             // button_editing_confirm
             // 
@@ -519,6 +530,7 @@
             textBox_barcode_delete.Name = "textBox_barcode_delete";
             textBox_barcode_delete.Size = new Size(194, 23);
             textBox_barcode_delete.TabIndex = 1;
+            textBox_barcode_delete.KeyDown += textBox_barcode_delete_KeyDown;
             // 
             // button_confirm_delete
             // 
@@ -570,10 +582,10 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1370, 749);
+            Controls.Add(panel_add);
             Controls.Add(label9);
             Controls.Add(textBox_multi);
             Controls.Add(button_multi);
-            Controls.Add(panel_add);
             Controls.Add(panel_editing);
             Controls.Add(panel_delete);
             Controls.Add(button_edit_element);
